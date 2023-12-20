@@ -22,6 +22,7 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
+        'usertype_id',
     ];
 
     /**
@@ -32,6 +33,8 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password'
     ];
+
+    public $timestamps = false;
 
     /**
      * The attributes that should be cast.

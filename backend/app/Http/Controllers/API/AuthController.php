@@ -46,13 +46,18 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
+            'usertype_id' => 'required|exists:user_types,id',
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->usertype_id = $request->usertype_id;
+        $user->save();
+
+        $token = Auth::login($user);
+        $user->token = $token;
 
         return response()->json([
             'message' => 'User created successfully',
