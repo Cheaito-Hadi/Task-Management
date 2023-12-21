@@ -1,0 +1,18 @@
+.my-button {
+    background-color: #2ECC71;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border-radius: 10px;
+    letter-spacing: 1px;
+    width: 100%;
+}
+
+.my-button:hover {
+    background-color: #2ECC71;
+}
