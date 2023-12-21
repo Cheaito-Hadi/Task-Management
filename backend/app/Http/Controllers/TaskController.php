@@ -41,7 +41,6 @@ class TaskController extends Controller
         $user = Auth::user();
 
         $task = $user->tasks->find($id);
-        // dd($task);
 
         if (is_null($task)) {
             return response()->json(["message" => 'Task not found']);
@@ -57,6 +56,16 @@ class TaskController extends Controller
         return response()->json([
             'message' => 'Task updated successfully',
             'task' => $task,
+        ]);
+    }
+
+    public function getAllTasks(){
+        $user = Auth::user();
+
+        $tasks = $user->tasks;
+
+        return response()->json([
+            'tasks' => $tasks,
         ]);
     }
 }
