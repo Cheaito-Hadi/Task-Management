@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -20,5 +21,19 @@ class TaskController extends Controller
             'message' => 'Task created successfully',
             'task' => $task,
         ]);
+    }
+
+    public function deleteTask(Request $request, $id){
+        $user = Auth::user();
+
+        $deletedTask= $user->tasks->where('id', $id)->first();
+        if (is_null($deletedTask)) {
+            return response()->json(["message" => 'Task not found']);
+        }
+        
+        $deletedTask->delete();
+
+        return response()->json(['message' => 'Task deleted successfully']);
+
     }
 }
