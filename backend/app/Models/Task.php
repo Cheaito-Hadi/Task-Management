@@ -11,6 +11,8 @@ class Task extends Model
 
     protected $fillable = ['title', 'description', 'due_date', 'status', 'user_id'];
 
+    public $timestamps = false;
+
     public function user()
     {
         return $this->belongsTo(User::class);
