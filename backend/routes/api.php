@@ -13,3 +13,4 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::post('/addTask', [TaskController::class, 'addTask']);
 Route::delete('/deleteTask/{id}', [TaskController::class, 'deleteTask']);
+Route::post('/updateTask/{id}', [TaskController::class, 'updateTask']);
