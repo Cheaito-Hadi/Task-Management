@@ -25,6 +25,16 @@ class User extends Authenticatable implements JWTSubject
         'usertype_id',
     ];
 
+    public function userType()
+    {
+        return $this->belongsTo(UserType::class);
+    }
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
