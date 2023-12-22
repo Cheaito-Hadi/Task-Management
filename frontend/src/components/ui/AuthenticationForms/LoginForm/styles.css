@@ -1,0 +1,39 @@
+.login-form {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid #ddd;
+    width: 420px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    background-color: #F7F0F3;;
+    color: white;
+    height: 530px;
+}
+
+.website-title{
+    color: black;
+    font-size: 30px;
+}
+
+.login-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 350px;
+}
+
+.cred-btn-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
