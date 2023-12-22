@@ -1,39 +1,43 @@
-.login-form {
+.login-container {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
     align-items: center;
+    justify-content: center;
     border: 1px solid #ddd;
     width: 420px;
-    padding: 20px;
+    padding: 10px;
     border-radius: 10px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    background-color: #F7F0F3;;
+    background-color: #3498db ;
     color: white;
-    height: 530px;
+    height: 500px;
 }
 
-.website-title{
-    color: black;
-    font-size: 30px;
+.login-heading {
+    color: white;
+    text-align: center;
+    padding-bottom: 40px;
 }
 
-.login-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 350px;
+.register-here {
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+
 }
 
-.cred-btn-wrapper{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+.register-here:hover {
+    text-decoration: underline;
+}
+
+.login-bot{
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .error-message {
     color: red;
-    font-size: 14px;
-    margin-top: 5px;
+    font-size: 16px;
+    font-weight: 500;
 }

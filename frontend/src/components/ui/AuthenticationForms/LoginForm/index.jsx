@@ -79,37 +79,38 @@ const LoginForm = () => {
     };
 
     return (
-        <div className="login-form">
-            <div className="website-title">Task Management</div>
-            <div className="login-container">
-                <div className="cred-btn-wrapper">
-                    <div>
-                        <Input
-                            placeholder="Email"
-                            value={credentials.email}
-                            onChange={handleDataChange}
-                            name="email"
-                            type="text"
-                            className={errors.email ? "input-error" : ""}
-                        />
-                        {errors.email && (
-                            <div className="error-message">{errors.email}</div>
-                        )}
-                        <Input
-                            placeholder="Password"
-                            value={credentials.password}
-                            onChange={handleDataChange}
-                            type="password"
-                            name="password"
-                            className={errors.password ? "input-error" : ""}
-                        />
-                        {errors.password && (
-                            <div className="error-message">{errors.password}</div>
-                        )}
-                        {errors.invalidCredentials && (
-                            <div className="error-message">{errors.invalidCredentials}</div>
-                        )}
-                    </div>
+        <div className="login-container">
+            <div>
+                <h2 className="login-heading">Login</h2>
+                <Input
+                    label="Email"
+                    placeholder="Email"
+                    value={credentials.email}
+                    onChange={handleDataChange}
+                    name="email"
+                    type="text"
+                    className={errors.email ? "input-error" : ""}
+                />
+                {errors.email && (
+                    <div className="error-message">{errors.email}</div>
+                )}
+                <Input
+                    label="Password"
+                    placeholder="Password"
+                    value={credentials.password}
+                    onChange={handleDataChange}
+                    type="password"
+                    name="password"
+                    className={errors.password ? "input-error" : ""}
+                />
+                {errors.password && (
+                    <div className="error-message">{errors.password}</div>
+                )}
+                {errors.invalidCredentials && (
+                    <div className="error-message">{errors.invalidCredentials}</div>
+                )}
+                <div className="login-bot">
+                    <span>Don't have an account? <a href="/Register" className="register-here"> Sign up here</a></span>
                     <Button
                         label="Login"
                         onClick={handleLogin}
@@ -117,6 +118,7 @@ const LoginForm = () => {
                 </div>
             </div>
         </div>
+
     );
 };
 
