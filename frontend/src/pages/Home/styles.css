@@ -5,3 +5,12 @@
     flex-direction: column;
     gap: 20px;
 }
+
+.create-task-container{
+    display: flex;
+
+}
+
+.task-title{
+    color: black;
+}
