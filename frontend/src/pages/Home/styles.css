@@ -1,4 +1,7 @@
-.testtt{
-    font-size: 30px;
+.home-container{
     margin-top: 85px;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
