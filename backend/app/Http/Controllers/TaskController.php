@@ -8,12 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    public function addTask(Request $request){
+    public function addTask(Request $request)
+    {
+        $dueDate = $request->due_date;
+        $status = $this->calculateStatus($dueDate);
+
         $task = Task::create([
             'title' => $request->title,
             'description' => $request->description,
-            'due_date' => $request->due_date,
-            'status' => "not finished",
+            'due_date' => $dueDate,
+            'status' => $status,
             'user_id' => auth()->id(),
         ]);
 
@@ -23,7 +27,7 @@ class TaskController extends Controller
         ]);
     }
 
-    public function deleteTask(Request $request, $id){
+    public function deleteTask($id){
 
         $deletedTask=Task::find($id);
         if (is_null($deletedTask)) {
@@ -58,11 +62,28 @@ class TaskController extends Controller
         ]);
     }
 
-    public function getAllTasks(){
-        $tasks= Task::all();
+    public function getAllTasks()
+    {
+        $tasks = Task::all();
+
+        $tasksWithStatus = $tasks->map(function ($task) {
+            $task->status = $this->calculateStatus($task->due_date);
+            return $task;
+        });
 
         return response()->json([
-            'tasks' => $tasks,
+            'tasks' => $tasksWithStatus,
         ]);
+    }
+
+    private function calculateStatus($dueDate)
+    {
+        $currentDate = now();
+
+        if ($dueDate > $currentDate) {
+            return 'In Progress';
+        }
+
+        return 'Finished';
     }
 }
