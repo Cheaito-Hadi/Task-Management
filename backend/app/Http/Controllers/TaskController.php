@@ -24,9 +24,8 @@ class TaskController extends Controller
     }
 
     public function deleteTask(Request $request, $id){
-        $user = Auth::user();
 
-        $deletedTask= $user->tasks->where('id', $id)->first();
+        $deletedTask=Task::find($id);
         if (is_null($deletedTask)) {
             return response()->json(["message" => 'Task not found']);
         }
@@ -60,10 +59,6 @@ class TaskController extends Controller
     }
 
     public function getAllTasks(){
-//        $user = Auth::user();
-//
-//        $tasks = $user->tasks;
-
         $tasks= Task::all();
 
         return response()->json([

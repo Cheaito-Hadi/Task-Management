@@ -24,8 +24,22 @@ const Home = () => {
                 },
             });
             setIsModalOpen(false);
+            fetchTasks();
         } catch (error) {
             console.error('Error creating task:', error);
+        }
+    };
+
+    const handleDeleteTask = async (id) => {
+        try {
+            await axios.delete(`http://127.0.0.1:8000/api/deleteTask/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            fetchTasks();
+        } catch (error) {
+            console.error('Error deleting task:', error);
         }
     };
 
@@ -76,6 +90,7 @@ const Home = () => {
                             due_date={item.due_date}
                             status={item.status}
                             id={item.id}
+                            onDelete={() => handleDeleteTask(item.id)}
                         />
                     ))}
                 </div>

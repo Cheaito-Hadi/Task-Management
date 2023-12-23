@@ -1,21 +1,23 @@
-import React, {useState} from 'react';
+// TaskCard.js
+
+import React, { useState } from 'react';
 import './styles.css';
-import AlertModal from "../AlertModal";
+import AlertModal from '../AlertModal';
 
-const TaskCard = ({ title, description, due_date, status, onDelete, onEdit}) => {
+const TaskCard = ({ title, description, due_date, status, onDelete, onEdit }) => {
     const [isAlertOpen, setIsAlertOpen] = useState(false);
-    const [userType, setUserType] = useState(localStorage.getItem("usertype"));
-
+    const [userType, setUserType] = useState(localStorage.getItem('usertype'));
 
     const handleEdit = () => {
         onEdit();
     };
+
     const handleDelete = () => {
         setIsAlertOpen(true);
     };
 
-    const handleConfirmDelete = () => {
-        onDelete();
+    const handleConfirmDelete = async () => {
+        await onDelete();
         setIsAlertOpen(false);
     };
 
@@ -28,7 +30,7 @@ const TaskCard = ({ title, description, due_date, status, onDelete, onEdit}) => 
             <div className="card-wrapper">
                 <div className="title-container">
                     <div className="title">{title}</div>
-                    {userType === "1" && (
+                    {userType === '1' && (
                         <div className="btns-wrapper">
                             <button className="edit-button" onClick={handleEdit}>
                                 Edit
