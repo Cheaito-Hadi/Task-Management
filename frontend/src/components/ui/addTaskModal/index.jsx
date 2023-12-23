@@ -15,7 +15,6 @@ const AddTaskModal = ({onClose, onSubmit}) => {
     };
 
     const handleSubmit = async () => {
-        debugger
         onSubmit({ ...newTask});
     };
     return (

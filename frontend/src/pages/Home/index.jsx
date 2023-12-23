@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import "./styles.css";
 import axios from "axios";
 import AddTaskModal from "../../components/ui/addTaskModal";
+import TaskCard from "../../components/ui/TaskCard";
 
 const Home = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -15,7 +16,6 @@ const Home = () => {
 
     const handleConfirmRequest = async (task) => {
         try {
-            console.log(task)
             await axios.post('http://127.0.0.1:8000/api/addTask', task, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -40,9 +40,9 @@ const Home = () => {
                 </div>
             )}
             <div className="view-task-container">
-                View Tasks:
+                <h1 className="task-heading">Tasks:</h1>
                 <div>
-                    <div>Card</div>
+                    <TaskCard/>
                 </div>
             </div>
         </div>

@@ -38,3 +38,7 @@
     width: 100px;
     align-self: end;
 }
+
+.task-heading{
+    margin-bottom: 10px;
+}
