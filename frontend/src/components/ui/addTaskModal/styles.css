@@ -1,0 +1,83 @@
+.modal-content {
+    border-radius: 20px;
+    background: #3498db ;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 90%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.modal-content h2 {
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 10px;
+    text-align: center;
+    width: 95%;
+    color: white;
+}
+
+.modal-request-title{
+    display: flex;
+    align-items: center;
+}
+
+.bloodtype-drop-label{
+    display: flex;
+}
+
+.task-input{
+    display: flex;
+}
+
+.modal-content label {
+    display: block;
+    margin-top: 15px;
+    width: 40%;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.modal-content select,
+.modal-content input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.modal-button {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.confirm-button {
+    background-color: #2ecc71 ;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    width: 70%;
+}
+
+.label-wrappers{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dropdown-styling{
+    font-size: 16px;
+}
