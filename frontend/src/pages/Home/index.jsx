@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import "./styles.css";
 import axios from "axios";
-import AddTaskModal from "../../components/ui/addTaskModal";
+import AddTaskModal from "../../components/ui/AddTaskModal";
 import TaskCard from "../../components/ui/TaskCard";
 
 const Home = () => {

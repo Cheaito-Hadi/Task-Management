@@ -32,7 +32,7 @@
 
 .status{
     align-self: center;
-    margin: 10px 0px;
+    margin: 10px 0;
 }
 
 .description{
@@ -46,4 +46,24 @@
 
 .due-date{
     margin-top: 10px;
+}
+
+.delete-button{
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.delete-button:hover{
+    cursor: pointer;
+}
+
+.edit-button{
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: goldenrod;
+    color: white;
+}
+
+.edit-button:hover{
+    cursor: pointer;
 }

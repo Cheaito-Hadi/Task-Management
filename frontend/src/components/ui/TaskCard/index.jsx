@@ -1,13 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './styles.css';
+import AlertModal from "../AlertModal";
 
-function TaskCard({title, description, due_date, status, onDelete, onEdit}) {
-    const handleDelete = () => {
-        onDelete();
-    };
+const TaskCard = ({ title, description, due_date, status, onDelete,onEdit }) => {
+    const [isAlertOpen, setIsAlertOpen] = useState(false);
+
 
     const handleEdit = () => {
         onEdit();
+    };
+    const handleDelete = () => {
+        setIsAlertOpen(true);
+    };
+
+    const handleConfirmDelete = () => {
+        onDelete();
+        setIsAlertOpen(false);
+    };
+
+    const handleCancelDelete = () => {
+        setIsAlertOpen(false);
     };
 
     return (
@@ -16,12 +28,12 @@ function TaskCard({title, description, due_date, status, onDelete, onEdit}) {
                 <div className="title-container">
                     <div className="title">{title}</div>
                     <div className="btns-wrapper">
-                        <button className="edit-button" onClick={handleEdit}>
-                            Edit
-                        </button>
-                        <button className="delete-button" onClick={handleDelete}>
-                            Delete
-                        </button>
+                    <button className="edit-button" onClick={handleEdit}>
+                        Edit
+                    </button>
+                    <button className="delete-button" onClick={handleDelete}>
+                        Delete
+                    </button>
                     </div>
                 </div>
                 <div className="status-switch-wrapper">
@@ -30,8 +42,14 @@ function TaskCard({title, description, due_date, status, onDelete, onEdit}) {
                 <div className="description">{description}</div>
                 <div className="due-date">Due Date: {due_date}</div>
             </div>
+            {isAlertOpen && (
+                <AlertModal
+                    onConfirm={handleConfirmDelete}
+                    onCancel={handleCancelDelete}
+                />
+            )}
         </div>
     );
-}
+};
 
 export default TaskCard;
