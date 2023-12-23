@@ -18,12 +18,14 @@ These instructions will help you set up and run the project on your local machin
 
 1. **Backend:**
    - Navigate to the backend directory: `cd backend`
-   - Run migrations to set up the database: `php artisan migrate`
+   - Run migrations to set up the database: `php artisan migrate`  
+
 
 2. **Frontend:**
    - Navigate to the frontend directory: `cd frontend`
    - Install dependencies: `npm install`
 
+PS: PLease validate usertype table contains id:1 Employer id:2 Employee
 ## Running the Project
 
 1. **Backend:**
