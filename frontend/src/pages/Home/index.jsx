@@ -9,6 +9,7 @@ const Home = () => {
     const [task, setTask] = useState([]);
     const [userType, setUserType] = useState(localStorage.getItem("usertype"));
     const [taskToEdit, setTaskToEdit] = useState(null);
+    const [selectedStatus, setSelectedStatus] = useState(null);
 
     const handleTaskClick = () => {
         setIsModalOpen(true);
@@ -78,6 +79,14 @@ const Home = () => {
         fetchTasks();
     }, []);
 
+    const handleStatusFilterChange = (status) => {
+        setSelectedStatus(status);
+    };
+
+    const filteredTasks = selectedStatus
+        ? task.filter(item => item.status === selectedStatus)
+        : task;
+
     return (
         <div className="home-container">
             {userType === "1" && (
@@ -85,6 +94,14 @@ const Home = () => {
                     Add Task
                 </button>
             )}
+            <div className="status-filter">
+                <label>Filter by Status:</label>
+                <select onChange={(e) => handleStatusFilterChange(e.target.value)}>
+                    <option value="">All</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Finished">Finished</option>
+                </select>
+            </div>
             {isModalOpen && (
                 <div className="modal-overlay">
                     <AddTaskModal
@@ -98,7 +115,7 @@ const Home = () => {
             <div className="view-task-container">
                 <h1 className="task-heading">Tasks:</h1>
                 <div className="task-cards">
-                    {task.map((item, index) => (
+                    {filteredTasks.map((item, index) => (
                         <TaskCard
                             key={index}
                             title={item.title}

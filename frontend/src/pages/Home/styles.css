@@ -49,3 +49,16 @@
     justify-content: space-between;
     flex-wrap: wrap;
 }
+
+.status-filter {
+    margin-bottom: 20px;
+}
+
+.status-filter label {
+    margin-right: 10px;
+}
+
+.status-filter select {
+    padding: 8px;
+    border-radius: 5px;
+}
