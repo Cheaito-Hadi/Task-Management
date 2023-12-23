@@ -41,26 +41,25 @@ class TaskController extends Controller
     }
 
     public function updateTask(Request $request, $id){
-        $user = Auth::user();
 
-        $task = $user->tasks->find($id);
+        $taskToUpdate = Task::find($id);
 
-        if (is_null($task)) {
+        if (is_null($taskToUpdate)) {
             return response()->json(["message" => 'Task not found']);
         }
 
-        $task->update([
+        $taskToUpdate->update([
             'title' => $request->title,
             'description' => $request->description,
             'due_date' => $request->due_date,
-            'status' => $request->status,
         ]);
 
         return response()->json([
             'message' => 'Task updated successfully',
-            'task' => $task,
+            'task' => $taskToUpdate,
         ]);
     }
+
 
     public function getAllTasks()
     {

@@ -1,27 +1,38 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import './styles.css';
 import XMark from '../../../assets/SVGs/XMark.svg';
 
-const AddTaskModal = ({onClose, onSubmit}) => {
+const AddTaskModal = ({ onClose, onSubmit, isEdit, taskToEdit }) => {
     const [newTask, setNewTask] = useState({
         title: '',
         description: '',
-        due_date:'',
+        due_date: '',
     });
 
+    useEffect(() => {
+        if (isEdit && taskToEdit) {
+            setNewTask({
+                title: taskToEdit.title,
+                description: taskToEdit.description,
+                due_date: taskToEdit.due_date,
+            });
+        }
+    }, [isEdit, taskToEdit]);
+
     const handleInputChange = (e) => {
-        const {name, value} = e.target;
-        setNewTask({...newTask, [name]: value});
+        const { name, value } = e.target;
+        setNewTask({ ...newTask, [name]: value });
     };
 
     const handleSubmit = async () => {
-        onSubmit({ ...newTask});
+        onSubmit({ ...newTask });
     };
+
     return (
         <div className="modal-content">
             <div className="modal-request-title">
-                <h2>Add a Task</h2>
-                <img src={XMark} alt="Close" onClick={onClose}/>
+                <h2>{isEdit ? 'Edit Task' : 'Add a Task'}</h2>
+                <img src={XMark} alt="Close" onClick={onClose} />
             </div>
             <div className="label-wrappers">
                 <div className="task-input">
@@ -62,7 +73,7 @@ const AddTaskModal = ({onClose, onSubmit}) => {
             </div>
             <div className="modal-button">
                 <button className="confirm-button" onClick={handleSubmit}>
-                    Confirm
+                    {isEdit ? 'Update' : 'Confirm'}
                 </button>
             </div>
         </div>

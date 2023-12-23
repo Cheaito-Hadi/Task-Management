@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import "./styles.css";
 import axios from "axios";
 import AddTaskModal from "../../components/ui/AddTaskModal";
@@ -8,26 +8,42 @@ const Home = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [task, setTask] = useState([]);
     const [userType, setUserType] = useState(localStorage.getItem("usertype"));
+    const [taskToEdit, setTaskToEdit] = useState(null);
+
     const handleTaskClick = () => {
         setIsModalOpen(true);
     };
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
+        setTaskToEdit(null);
     };
 
     const handleConfirmRequest = async (task) => {
         try {
-            await axios.post('http://127.0.0.1:8000/api/addTask', task, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
-            });
+            if (taskToEdit) {
+                await axios.post(`http://127.0.0.1:8000/api/updateTask/${taskToEdit.id}`, task, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                });
+            } else {
+                await axios.post('http://127.0.0.1:8000/api/addTask', task, {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                    },
+                });
+            }
             setIsModalOpen(false);
             fetchTasks();
         } catch (error) {
-            console.error('Error creating task:', error);
+            console.error('Error creating/updating task:', error);
         }
+    };
+
+    const handleEditTask = (task) => {
+        setTaskToEdit(task);
+        setIsModalOpen(true);
     };
 
     const handleDeleteTask = async (id) => {
@@ -53,16 +69,14 @@ const Home = () => {
                 const taskData = response.data.tasks;
                 setTask(taskData);
             })
-
             .catch(error => {
-                console.error("Error fetching blood request data:", error);
+                console.error("Error fetching task data:", error);
             });
     }
-    useEffect(() => {
 
+    useEffect(() => {
         fetchTasks();
     }, []);
-
 
     return (
         <div className="home-container">
@@ -76,6 +90,8 @@ const Home = () => {
                     <AddTaskModal
                         onClose={handleCloseModal}
                         onSubmit={handleConfirmRequest}
+                        isEdit={!!taskToEdit}
+                        taskToEdit={taskToEdit}
                     />
                 </div>
             )}
@@ -91,6 +107,7 @@ const Home = () => {
                             status={item.status}
                             id={item.id}
                             onDelete={() => handleDeleteTask(item.id)}
+                            onEdit={() => handleEditTask(item)}
                         />
                     ))}
                 </div>
