@@ -1,4 +1,4 @@
-.home-container{
+.home-container {
     margin-top: 85px;
     padding: 10px 20px;
     display: flex;
@@ -6,12 +6,12 @@
     gap: 20px;
 }
 
-.create-task-container{
+.create-task-container {
     display: flex;
 
 }
 
-.task-title{
+.task-title {
     color: black;
 }
 
@@ -28,7 +28,7 @@
     z-index: 1000;
 }
 
-.add-task-btn{
+.add-task-btn {
     padding: 7px 15px 7px 15px;
     background-color: #2ecc71;
     border-radius: 10px;
@@ -39,6 +39,13 @@
     align-self: end;
 }
 
-.task-heading{
+.task-heading {
     margin-bottom: 10px;
+}
+
+.task-cards {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }

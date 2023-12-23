@@ -7,6 +7,7 @@ import TaskCard from "../../components/ui/TaskCard";
 const Home = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [task, setTask] = useState([]);
+    const [userType, setUserType] = useState(localStorage.getItem("usertype"));
     const handleTaskClick = () => {
         setIsModalOpen(true);
     };
@@ -51,9 +52,11 @@ const Home = () => {
 
     return (
         <div className="home-container">
-            <button className="add-task-btn" onClick={handleTaskClick}>
-                Add Task
-            </button>
+            {userType === "1" && (
+                <button className="add-task-btn" onClick={handleTaskClick}>
+                    Add Task
+                </button>
+            )}
             {isModalOpen && (
                 <div className="modal-overlay">
                     <AddTaskModal
@@ -64,13 +67,14 @@ const Home = () => {
             )}
             <div className="view-task-container">
                 <h1 className="task-heading">Tasks:</h1>
-                <div className="bank-cards">
+                <div className="task-cards">
                     {task.map((item, index) => (
                         <TaskCard
                             key={index}
                             title={item.title}
                             description={item.description}
                             due_date={item.due_date}
+                            status={item.status}
                             id={item.id}
                         />
                     ))}

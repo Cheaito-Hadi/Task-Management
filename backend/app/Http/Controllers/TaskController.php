@@ -60,9 +60,11 @@ class TaskController extends Controller
     }
 
     public function getAllTasks(){
-        $user = Auth::user();
+//        $user = Auth::user();
+//
+//        $tasks = $user->tasks;
 
-        $tasks = $user->tasks;
+        $tasks= Task::all();
 
         return response()->json([
             'tasks' => $tasks,
