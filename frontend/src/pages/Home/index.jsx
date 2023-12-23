@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import "./styles.css";
 import axios from "axios";
 import AddTaskModal from "../../components/ui/AddTaskModal";
@@ -89,18 +89,20 @@ const Home = () => {
 
     return (
         <div className="home-container">
-            {userType === "1" && (
-                <button className="add-task-btn" onClick={handleTaskClick}>
-                    Add Task
-                </button>
-            )}
             <div className="status-filter">
-                <label>Filter by Status:</label>
-                <select onChange={(e) => handleStatusFilterChange(e.target.value)}>
-                    <option value="">All</option>
-                    <option value="In Progress">In Progress</option>
-                    <option value="Finished">Finished</option>
-                </select>
+                {userType === "1" && (
+                    <button className="add-task-btn" onClick={handleTaskClick}>
+                        Add a Task
+                    </button>
+                )}
+                <div className="filter">
+                    <label>Filter by Status:</label>
+                    <select onChange={(e) => handleStatusFilterChange(e.target.value)}>
+                        <option value="">All</option>
+                        <option value="In Progress">In Progress</option>
+                        <option value="Finished">Finished</option>
+                    </select>
+                </div>
             </div>
             {isModalOpen && (
                 <div className="modal-overlay">

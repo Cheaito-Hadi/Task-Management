@@ -35,7 +35,7 @@
     color: white;
     font-size: 18px;
     font-weight: 500;
-    width: 100px;
+    width: 120px;
     align-self: end;
 }
 
@@ -45,20 +45,43 @@
 
 .task-cards {
     display: flex;
-    gap: 20px;
-    justify-content: space-between;
     flex-wrap: wrap;
+    gap: 20px;
+    /*justify-content: space-between;*/
+
 }
 
 .status-filter {
     margin-bottom: 20px;
+    display: flex;
+     gap: 20px;
+}
+
+.filter{
+    display: flex;
 }
 
 .status-filter label {
     margin-right: 10px;
+    color: black;
+    font-size: 20px;
+    font-weight: 600;
 }
 
 .status-filter select {
     padding: 8px;
     border-radius: 5px;
+}
+
+.view-task-container{
+    display: flex;
+    background-color: #f0f3f8;
+    padding: 30px 50px;
+    flex-direction: column;
+    gap: 10px;
+    flex-wrap: wrap;
+    border-radius: 10px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    flex-grow: 1;
+    max-width: 100%;
 }

@@ -7,7 +7,7 @@ const AlertModal = ({ onConfirm, onCancel }) => {
             <div className="modal-content">
                 <div className="modal-text">Are you sure you want to delete this task?</div>
                 <div className="modal-buttons">
-                    <button className="delete-button" onClick={onConfirm}>
+                    <button className="delete-alert-button" onClick={onConfirm}>
                         Delete
                     </button>
                     <button className="cancel-button" onClick={onCancel}>
