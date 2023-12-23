@@ -5,12 +5,7 @@ import AddTaskModal from "../../components/ui/addTaskModal";
 
 const Home = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [newTask, setNewTask] = useState({
-        title: '',
-        description: '',
-    });
-
-    const handleAddRequestClick = () => {
+    const handleTaskClick = () => {
         setIsModalOpen(true);
     };
 
@@ -18,9 +13,10 @@ const Home = () => {
         setIsModalOpen(false);
     };
 
-    const handleConfirmRequest = async () => {
+    const handleConfirmRequest = async (task) => {
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/addTask', newTask, {
+            console.log(task)
+            await axios.post('http://127.0.0.1:8000/api/addTask', task, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`,
                 },
@@ -32,7 +28,7 @@ const Home = () => {
     };
     return (
         <div className="home-container">
-            <button className="add-request-btn" onClick={handleAddRequestClick}>
+            <button className="add-task-btn" onClick={handleTaskClick}>
                 Add Task
             </button>
             {isModalOpen && (

@@ -3,10 +3,10 @@ import './styles.css';
 import XMark from '../../../assets/SVGs/XMark.svg';
 
 const AddTaskModal = ({onClose, onSubmit}) => {
-    const [dueDate, setDueDate] = useState('');
     const [newTask, setNewTask] = useState({
         title: '',
         description: '',
+        due_date:'',
     });
 
     const handleInputChange = (e) => {
@@ -15,7 +15,8 @@ const AddTaskModal = ({onClose, onSubmit}) => {
     };
 
     const handleSubmit = async () => {
-        onSubmit({ ...newTask, dueDate });
+        debugger
+        onSubmit({ ...newTask});
     };
     return (
         <div className="modal-content">
@@ -52,10 +53,10 @@ const AddTaskModal = ({onClose, onSubmit}) => {
                     <label>Due Date:</label>
                     <input
                         type="datetime-local"
-                        id="dueDate"
-                        name="dueDate"
-                        value={dueDate}
-                        onChange={(e) => setDueDate(e.target.value)}
+                        id="due_date"
+                        name="due_date"
+                        value={newTask.due_date}
+                        onChange={handleInputChange}
                         required
                     />
                 </div>

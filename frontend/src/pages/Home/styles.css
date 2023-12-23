@@ -28,14 +28,7 @@
     z-index: 1000;
 }
 
-.add-request{
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-}
-
-.add-request-btn{
+.add-task-btn{
     padding: 7px 15px 7px 15px;
     background-color: #2ecc71;
     border-radius: 10px;
