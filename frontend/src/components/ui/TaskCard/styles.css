@@ -15,6 +15,16 @@
     margin: 10px 20px;
 }
 
+.title-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.btns-wrapper{
+    display: flex;
+    gap: 5px;
+}
+
 .status-switch-wrapper{
     display: flex;
     justify-content: space-between;
@@ -22,6 +32,7 @@
 
 .status{
     align-self: center;
+    margin: 10px 0px;
 }
 
 .description{
