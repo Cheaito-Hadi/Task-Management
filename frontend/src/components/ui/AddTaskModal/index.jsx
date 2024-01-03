@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import './styles.css';
 import XMark from '../../../assets/SVGs/XMark.svg';
+import axios from 'axios';
 
 const AddTaskModal = ({ onClose, onSubmit, isEdit, taskToEdit }) => {
     const [newTask, setNewTask] = useState({
         title: '',
         description: '',
         due_date: '',
+        employee_id: '',
     });
+    const [employees, setEmployees] = useState([]);
 
     useEffect(() => {
+        fetchEmployees();
+
         if (isEdit && taskToEdit) {
             setNewTask({
                 title: taskToEdit.title,
                 description: taskToEdit.description,
                 due_date: taskToEdit.due_date,
+                employee_id: taskToEdit.employee_id.toString(),
             });
         }
     }, [isEdit, taskToEdit]);
@@ -22,6 +28,19 @@ const AddTaskModal = ({ onClose, onSubmit, isEdit, taskToEdit }) => {
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setNewTask({ ...newTask, [name]: value });
+    };
+
+    const fetchEmployees = async () => {
+        try {
+            const response = await axios.get('http://127.0.0.1:8000/api/getAllEmployees', {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            setEmployees(response.data.employees);
+        } catch (error) {
+            console.error('Error fetching employees:', error);
+        }
     };
 
     const handleSubmit = async () => {
@@ -69,6 +88,23 @@ const AddTaskModal = ({ onClose, onSubmit, isEdit, taskToEdit }) => {
                         onChange={handleInputChange}
                         required
                     />
+                </div>
+                <div className="task-input">
+                    <label>Assign to Employee:</label>
+                    <select
+                        id="employee_id"
+                        name="employee_id"
+                        value={newTask.employee_id}
+                        onChange={handleInputChange}
+                        required
+                    >
+                        <option value="" disabled>Select Employee</option>
+                        {employees.map((employee) => (
+                            <option key={employee.id} value={employee.id}>
+                                {employee.name}
+                            </option>
+                        ))}
+                    </select>
                 </div>
             </div>
             <div className="modal-button">
