@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Task;
-use Illuminate\Support\Facades\Auth;
-
 class TaskController extends Controller
 {
     public function addTask(Request $request)
@@ -29,9 +28,10 @@ class TaskController extends Controller
         ]);
     }
 
-    public function deleteTask($id){
+    public function deleteTask($id)
+    {
 
-        $deletedTask=Task::find($id);
+        $deletedTask = Task::find($id);
         if (is_null($deletedTask)) {
             return response()->json(["message" => 'Task not found']);
         }
@@ -42,7 +42,8 @@ class TaskController extends Controller
 
     }
 
-    public function updateTask(Request $request, $id){
+    public function updateTask(Request $request, $id)
+    {
 
         $taskToUpdate = Task::find($id);
 
@@ -74,6 +75,15 @@ class TaskController extends Controller
 
         return response()->json([
             'tasks' => $tasksWithStatus,
+        ]);
+    }
+
+    public function getAllEmployees()
+    {
+        $employees = User::where('usertype_id', 2)->get();
+
+        return response()->json([
+            'employees' => $employees,
         ]);
     }
 
