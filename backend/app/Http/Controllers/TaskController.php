@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Task;
+use Illuminate\Support\Facades\Auth;
+
 class TaskController extends Controller
 {
     public function addTask(Request $request)
@@ -66,8 +68,14 @@ class TaskController extends Controller
 
     public function getAllTasks()
     {
-        $tasks = Task::all();
+        $user = Auth::user();
+        $usertypeId = $user->usertype_id;
 
+        if ($usertypeId == 1) {
+            $tasks = Task::all();
+        } elseif ($usertypeId == 2) {
+            $tasks = $user->tasks;
+        }
         $tasksWithStatus = $tasks->map(function ($task) {
             $task->status = $this->calculateStatus($task->due_date);
             return $task;
