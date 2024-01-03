@@ -13,12 +13,14 @@ class TaskController extends Controller
         $dueDate = $request->due_date;
         $status = $this->calculateStatus($dueDate);
 
+        $employeeId = $request->employee_id;
+
         $task = Task::create([
             'title' => $request->title,
             'description' => $request->description,
             'due_date' => $dueDate,
             'status' => $status,
-            'user_id' => auth()->id(),
+            'user_id' => $employeeId,
         ]);
 
         return response()->json([
