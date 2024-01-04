@@ -12,7 +12,6 @@ class TaskController extends Controller
     public function addTask(Request $request)
     {
         $dueDate = $request->due_date;
-        $status = $this->calculateStatus($dueDate);
 
         $employeeId = $request->employee_id;
 
@@ -20,7 +19,7 @@ class TaskController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'due_date' => $dueDate,
-            'status' => $status,
+            'status' => 'In Progress',
             'user_id' => $employeeId,
         ]);
 
@@ -75,13 +74,9 @@ class TaskController extends Controller
         } elseif ($usertypeId == 2) {
             $tasks = $user->tasks;
         }
-        $tasksWithStatus = $tasks->map(function ($task) {
-            $task->status = $this->calculateStatus($task->due_date);
-            return $task;
-        });
 
         return response()->json([
-            'tasks' => $tasksWithStatus,
+            'tasks' => $tasks,
         ]);
     }
 
@@ -112,14 +107,4 @@ class TaskController extends Controller
         ]);
     }
 
-    private function calculateStatus($dueDate)
-    {
-        $currentDate = now();
-
-        if ($dueDate > $currentDate) {
-            return 'In Progress';
-        }
-
-        return 'Finished';
-    }
 }
