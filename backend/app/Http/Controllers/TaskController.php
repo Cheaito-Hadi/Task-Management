@@ -52,13 +52,10 @@ class TaskController extends Controller
             return response()->json(["message" => 'Task not found']);
         }
 
-        $newStatus = $taskToUpdate->status === 'Finished' ? 'In Progress' : 'Finished';
-
         $taskToUpdate->update([
             'title' => $request->title,
             'description' => $request->description,
             'due_date' => $request->due_date,
-            'status' => $newStatus,
         ]);
 
         return response()->json([
@@ -94,6 +91,24 @@ class TaskController extends Controller
 
         return response()->json([
             'employees' => $employees,
+        ]);
+    }
+
+    public function toggleStatus($id)
+    {
+        $task = Task::find($id);
+
+        if (is_null($task)) {
+            return response()->json(["message" => 'Task not found']);
+        }
+
+        $task->update([
+            'status' => $task->status === 'Finished' ? 'In Progress' : 'Finished',
+        ]);
+
+        return response()->json([
+            'message' => 'Task status toggled successfully',
+            'task' => $task,
         ]);
     }
 
