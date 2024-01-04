@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './styles.css';
 import AlertModal from '../AlertModal';
 
-const TaskCard = ({ title, description, due_date, status, id, onDelete, onEdit, onToggle }) => {
+const TaskCard = ({ title, description, due_date, status, onDelete, onEdit, onToggle }) => {
     const [isAlertOpen, setIsAlertOpen] = useState(false);
     const [userType, setUserType] = useState(localStorage.getItem('usertype'));
 
