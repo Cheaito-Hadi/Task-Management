@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './styles.css';
 import AlertModal from '../AlertModal';
 
-const TaskCard = ({ title, description, due_date, status, onDelete, onEdit }) => {
+const TaskCard = ({ title, description, due_date, status, id, onDelete, onEdit, onToggle }) => {
     const [isAlertOpen, setIsAlertOpen] = useState(false);
     const [userType, setUserType] = useState(localStorage.getItem('usertype'));
 
@@ -23,6 +23,10 @@ const TaskCard = ({ title, description, due_date, status, onDelete, onEdit }) =>
         setIsAlertOpen(false);
     };
 
+    const handleToggleStatus = async () => {
+        onToggle();
+    };
+
     return (
         <div className="card-container">
             <div className="card-wrapper">
@@ -30,7 +34,17 @@ const TaskCard = ({ title, description, due_date, status, onDelete, onEdit }) =>
                     <div>{title}</div>
                 </div>
                 <div className="status-switch-wrapper">
-                    <div className="status">{status}</div>
+
+                        <div className="status-toggle">
+                            <span>Status: {status}</span>
+                            {userType === '2' && (
+                            <label className="switch">
+                                <input type="checkbox" checked={status === 'Finished'} onChange={handleToggleStatus} />
+                                <span className="slider round"></span>
+                            </label>
+                            )}
+                        </div>
+
                     {userType === '1' && (
                         <div className="btns-wrapper">
                             <button className="edit-button" onClick={handleEdit}>

@@ -75,6 +75,20 @@ const Home = () => {
             });
     }
 
+    const handleToggleStatus = async (id) => {
+        try {
+            await axios.post(`http://127.0.0.1:8000/api/toggleStatus/${id}`, {}, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            });
+            fetchTasks();
+        } catch (error) {
+            console.error('Error toggling task status:', error);
+        }
+    };
+
+
     useEffect(() => {
         fetchTasks();
     }, []);
@@ -127,6 +141,7 @@ const Home = () => {
                             id={item.id}
                             onDelete={() => handleDeleteTask(item.id)}
                             onEdit={() => handleEditTask(item)}
+                            onToggle={() => handleToggleStatus(item.id)}
                         />
                     ))}
                 </div>
