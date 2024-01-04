@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import './styles.css';
 import XMark from '../../../assets/SVGs/XMark.svg';
 import axios from 'axios';
 
-const AddTaskModal = ({ onClose, onSubmit, isEdit, taskToEdit }) => {
+const AddTaskModal = ({onClose, onSubmit, isEdit, taskToEdit}) => {
     const [newTask, setNewTask] = useState({
         title: '',
         description: '',
@@ -13,21 +13,23 @@ const AddTaskModal = ({ onClose, onSubmit, isEdit, taskToEdit }) => {
     const [employees, setEmployees] = useState([]);
 
     useEffect(() => {
-        fetchEmployees();
+        if (!isEdit) {
+            fetchEmployees();
+        }
 
         if (isEdit && taskToEdit) {
             setNewTask({
                 title: taskToEdit.title,
                 description: taskToEdit.description,
                 due_date: taskToEdit.due_date,
-                employee_id: taskToEdit.employee_id.toString(),
+                employee_id: taskToEdit.employee_id,
             });
         }
     }, [isEdit, taskToEdit]);
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewTask({ ...newTask, [name]: value });
+        const {name, value} = e.target;
+        setNewTask({...newTask, [name]: value});
     };
 
     const fetchEmployees = async () => {
@@ -44,14 +46,14 @@ const AddTaskModal = ({ onClose, onSubmit, isEdit, taskToEdit }) => {
     };
 
     const handleSubmit = async () => {
-        onSubmit({ ...newTask });
+        onSubmit({...newTask});
     };
 
     return (
         <div className="modal-content">
             <div className="modal-request-title">
                 <h2>{isEdit ? 'Edit Task' : 'Add a Task'}</h2>
-                <img src={XMark} alt="Close" onClick={onClose} />
+                <img src={XMark} alt="Close" onClick={onClose}/>
             </div>
             <div className="label-wrappers">
                 <div className="task-input">
@@ -89,23 +91,25 @@ const AddTaskModal = ({ onClose, onSubmit, isEdit, taskToEdit }) => {
                         required
                     />
                 </div>
-                <div className="task-input">
-                    <label>Assign to Employee:</label>
-                    <select
-                        id="employee_id"
-                        name="employee_id"
-                        value={newTask.employee_id}
-                        onChange={handleInputChange}
-                        required
-                    >
-                        <option value="" disabled>Select Employee</option>
-                        {employees.map((employee) => (
-                            <option key={employee.id} value={employee.id}>
-                                {employee.name}
-                            </option>
-                        ))}
-                    </select>
-                </div>
+                {!isEdit && (
+                    <div className="task-input">
+                        <label>Assign to Employee:</label>
+                        <select
+                            id="employee_id"
+                            name="employee_id"
+                            value={newTask.employee_id}
+                            onChange={handleInputChange}
+                            required
+                        >
+                            <option value="" disabled>Select Employee</option>
+                            {employees.map((employee) => (
+                                <option key={employee.id} value={employee.id}>
+                                    {employee.name}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                )}
             </div>
             <div className="modal-button">
                 <button className="confirm-button" onClick={handleSubmit}>
