@@ -46,17 +46,19 @@ class TaskController extends Controller
 
     public function updateTask(Request $request, $id)
     {
-
         $taskToUpdate = Task::find($id);
 
         if (is_null($taskToUpdate)) {
             return response()->json(["message" => 'Task not found']);
         }
 
+        $newStatus = $taskToUpdate->status === 'Finished' ? 'In Progress' : 'Finished';
+
         $taskToUpdate->update([
             'title' => $request->title,
             'description' => $request->description,
             'due_date' => $request->due_date,
+            'status' => $newStatus,
         ]);
 
         return response()->json([
